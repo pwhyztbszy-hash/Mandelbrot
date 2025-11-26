@@ -14,7 +14,7 @@ enum State
 	DISPLAYING
 };
 
-class ComplexPlane
+class ComplexPlane: public Drawable
 {
 public:
 
