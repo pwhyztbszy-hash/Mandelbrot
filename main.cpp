@@ -40,7 +40,7 @@ int main()
 					cPlane.setCenter(Vector2i(float(event.mouseButton.x), float(event.mouseButton.y)));
 
 				}
-				if (event.mouseButton.button == Mouse::Right)
+				if (event.mouseButton.button == Mouse::Left)
 				{
 					cPlane.zoomIn();
 					cPlane.setCenter(Vector2i(float(event.mouseButton.x), float(event.mouseButton.y)));
