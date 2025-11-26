@@ -9,7 +9,6 @@ using namespace std;
 int main()
 
 {
-
 	int pixelWidth = VideoMode::getDesktopMode().width;
 	int pixelHeight = VideoMode::getDesktopMode().height;
 
@@ -38,12 +37,14 @@ int main()
 				{
 					cPlane.zoomOut();
 					cPlane.setCenter(Vector2i(float(event.mouseButton.x), float(event.mouseButton.y)));
+					cout << "pixel (" << event.mouseButton.x << "," << event.mouseButton.y << ")" << endl;
 
 				}
 				if (event.mouseButton.button == Mouse::Left)
 				{
 					cPlane.zoomIn();
 					cPlane.setCenter(Vector2i(float(event.mouseButton.x), float(event.mouseButton.y)));
+					cout << "pixel (" << event.mouseButton.x << "," << event.mouseButton.y << ")" << endl;
 				}
 			}
 
@@ -73,7 +74,5 @@ int main()
 		//window.draw(...);
 
 		window.display();
-
 	}
-
 }
