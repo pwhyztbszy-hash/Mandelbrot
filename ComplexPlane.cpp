@@ -1,3 +1,4 @@
+#include <iostream>
 #include <cmath>
 #include <SFML/Graphics.hpp>
 #include "ComplexPlane.h"
@@ -71,7 +72,7 @@ void ComplexPlane::setMouseLocation(Vector2i mousePixel)
 
 void ComplexPlane::loadText(Text& text)
 {
-
+	
 }
 
 
@@ -107,33 +108,51 @@ void ComplexPlane::updateRender()
 int ComplexPlane::countIterations(Vector2f coord)
 {
 	
+	complex<double> c = { coord.x, coord.y };
+
 	complex<double> z = c;
 	int i = 0;
+	complex<double> four = { 4, 0 };
+
 	//while(abs(z) < 2.0 && i < 64)
-	while (z * z < 4.0 && i < 64) //z*z executes faster because abs(z) uses sqrt
+	while (abs(z) < 2.0 && i < 64) //z*z executes faster because abs(z) uses sqrt
 	{
-		c =  coord.x + coord.y;
 		z = z * z + c;
 		//cout << "z_" << i << "= " << z << endl;
 		//cout << "|z| = " << abs(c) << endl;
 		i++;
 	}
-
 	return i;
 }
 
 
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 {
-	if (count == MAX_ITER) { rgbVal = { 0, 0, 0 }; }
-	else if (count == 0) { rgbVal = { 255, 0, 0 }; }
-	else { rgbVal = { (255.0 / count) 0, 0 }; }
+
+	if (count == MAX_ITER)
+	{
+		r = 0;
+		g = 0;
+		b = 0;
+	}
+	else if (count == 0)
+	{
+		r = 255;
+		g = 0;
+		b = 0;
+	}
+	else
+	{
+		r = 255;
+		g = (255.0 / 64.0) * count;
+		b = (255.0 / 64.0) * count;
+	}
 }
 
 
 Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel)
 {
-	float coordX = ((mousePixel.x - 0.0) / (1920.0 - 0.0))* m_plane_size.x + (m_plane_center.x - m_plane_size.x / 2.0);
+	float coordX = ((mousePixel.x - 0.0) / (1920.0 - 0.0)) * m_plane_size.x + (m_plane_center.x - m_plane_size.x / 2.0);
 	float coordY = ((mousePixel.y - 1080.0) / (0 - 1080.0)) * m_plane_size.y + (m_plane_center.y - m_plane_size.y / 2.0);
 
 	return Vector2f(coordX, coordY);
