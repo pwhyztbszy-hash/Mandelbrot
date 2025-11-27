@@ -75,7 +75,7 @@ int main()
 
 		///Update
 		cPlane.updateRender();
-		//cPlane.loadText();
+		cPlane.loadText(text);
 
 
 		///Draw
@@ -83,7 +83,7 @@ int main()
 		window.clear();
 		window.draw(cPlane);
 
-		//window.draw(...);
+		window.draw(text);
 
 		window.display();
 	}
