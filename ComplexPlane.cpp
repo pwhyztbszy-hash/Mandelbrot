@@ -118,7 +118,7 @@ int ComplexPlane::countIterations(Vector2f coord)
 
 	complex<double> z = c;
 	int i = 0;
-	complex<double> four = { 4, 0 };
+	//complex<double> four = { 4, 0 };
 
 	//while(abs(z) < 2.0 && i < 64)
 	while (abs(z) < 2.0 && i < 64) //z*z executes faster because abs(z) uses sqrt
