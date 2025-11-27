@@ -18,6 +18,18 @@ int main()
 	ComplexPlane cPlane(1920, 1080);
 
 	//Construct the Font and Text objects
+	Font font;
+    if (!font.loadFromFile("fonts/Roboto-Italic.ttf"))
+    {
+        cout << "ERROR: Could not load fonts/Roboto-Italic.ttf" << endl;
+        return 1;
+    }
+
+    Text text;
+    text.setFont(font);
+    text.setCharacterSize(24);
+    text.setFillColor(Color::White);
+    text.setPosition(10, 10);
 
 
 	while (window.isOpen())
