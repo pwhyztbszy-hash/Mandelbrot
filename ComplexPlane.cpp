@@ -93,7 +93,7 @@ void ComplexPlane::updateRender()
     if (m_state == CALCULATING)
     {
         int numThreads = thread::hardware_concurrency();
-        cout << numThreads << " - number of threads";
+        //cout << numThreads << " - number of threads";
         int rowsPerThread = pixelHeight / numThreads;
         vector<thread> threads;
         
