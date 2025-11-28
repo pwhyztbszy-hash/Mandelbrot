@@ -91,7 +91,7 @@ void ComplexPlane::updateRender()
     if (m_state == CALCULATING)
     {
         int numThreads = thread::hardware_concurrency();
-        cout << numThreads << " - number of threads" << endl;
+        cout << numThreads << " - number of threads";
         
         
         int rowsPerThread = pixelHeight / numThreads;
@@ -109,7 +109,7 @@ void ComplexPlane::updateRender()
             {
                 endY = startY + rowsPerThread;
             }
-            threads.emplace_back([=, &m_vArray, this]() {
+            threads.emplace_back([=]() {
                 for (int i = startY; i < endY; i++)
                 {
                     for (int j = 0; j < pixelWidth; j++)
@@ -137,21 +137,22 @@ void ComplexPlane::updateRender()
 
 int ComplexPlane::countIterations(Vector2f coord)
 {
-    
-    complex<double> c = { coord.x, coord.y };
-
-    complex<double> z = c;
+    //(z) = (z.x² - z.y² + x,2z.xz.y + y)
+    //d(z) = √x.z² + z.y²
+    //d(f(f(f(f(f(f(f(f((x,y)))))))))) <= 2
+     
+    Vector2f z(0.0, 0.0);
+    Vector2f c = coord;
     int i = 0;
-    //complex<double> four = { 4, 0 };
 
-    //while(abs(z) < 2.0 && i < 64)
-    while (abs(z) < 2.0 && i < 64) //z*z executes faster because abs(z) uses sqrt
+    while (z.x * z.x + z.y * z.y <= 4.0 && i < 64) //d(f(f(f(f(f(f(f(f((x,y)))))))))) <= 2
     {
-        z = z * z + c;
-        //cout << "z_" << i << "= " << z << endl;
-        //cout << "|z| = " << abs(c) << endl;
+        float temp = z.x * z.x - z.y * z.y + c.x; //z.x² - z.y² + x
+        z.y = 2.0 * z.x * z.y + c.y; //2z.xz.y + y)
+        z.x = temp;
         i++;
     }
+
     return i;
 }
 
