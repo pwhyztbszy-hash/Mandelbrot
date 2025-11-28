@@ -83,6 +83,9 @@ void ComplexPlane::loadText(Text& text)
     text.setString(ss.str());
 }
 
+int numThreads = thread::hardware_concurrency();
+cout << numThreads << " - number of threads";
+
 void ComplexPlane::updateRender()
 {
     int pixelWidth = m_pixel_size.x;
@@ -90,10 +93,7 @@ void ComplexPlane::updateRender()
 
     if (m_state == CALCULATING)
     {
-        int numThreads = thread::hardware_concurrency();
-        cout << numThreads << " - number of threads";
-        
-        
+           
         int rowsPerThread = pixelHeight / numThreads;
         vector<thread> threads;
         
