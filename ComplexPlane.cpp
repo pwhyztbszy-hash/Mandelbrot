@@ -137,7 +137,7 @@ void ComplexPlane::updateRender()
 
 int ComplexPlane::countIterations(Vector2f coord)
 {
-    //(z) = (z.x² - z.y² + x,2z.xz.y + y)
+    //f(z) = (z.x² - z.y² + x,2z.xz.y + y)
     //d(z) = √x.z² + z.y²
     //d(f(f(f(f(f(f(f(f((x,y)))))))))) <= 2
      
