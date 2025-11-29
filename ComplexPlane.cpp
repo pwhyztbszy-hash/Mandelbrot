@@ -149,6 +149,7 @@ int ComplexPlane::countIterations(Vector2f coord)
     {
         float temp = z.x * z.x - z.y * z.y + c.x; //z.x² - z.y² + x
         z.y = 2.0 * z.x * z.y + c.y; //2z.xz.y + y)
+      //  z.y = abs(2.0 * z.x * z.y) + c.y;  burning ship 
         z.x = temp;
         i++;
     }
